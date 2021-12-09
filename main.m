@@ -24,7 +24,7 @@ function filled = Filter(img)
 
     filled = imreconstruct(marker, mask, conn);
     filled = imcomplement(filled);
-endfunction
+end
 
 
 function marker = no_borde(img, conn, val)
@@ -35,8 +35,6 @@ function marker = no_borde(img, conn, val)
     conn_idx_tmp = repmat({":"}, ndims (conn), 1);
     for dim = 1:ndims(conn)
         conn_idx = conn_idx_tmp;
-        ## Because connectivity is symmetric by definition, we only need
-        ## to check the first slice of that dimension.
         conn_idx{dim} = [1];
         if (any(conn(conn_idx{:})(:)))
         nonborder_idx{dim} = 2:(sz(dim) -1);
@@ -48,7 +46,7 @@ function marker = no_borde(img, conn, val)
 end
 
 
-imagen = rgb2gray(imread("pesos.jpeg"));
+imagen = rgb2gray(imread("pesos2.jpeg"));
 figure(1); imshow(imagen);
 
 [y, x] = size(imagen); 
@@ -61,7 +59,7 @@ max_hist = max(sizer);
 
 figure(2); imhist(imagen);
 
-t = 120;
+t = 240;
 hT = H(min_hist+1, t, N, nG) + H(t+1, max_hist, N, nG);
 
 imagen_umbralizada = im2bw(imagen, hT);
