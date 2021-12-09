@@ -1,0 +1,1 @@
+# Contador de monedas desde scratch
